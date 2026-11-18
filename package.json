@@ -1,7 +1,7 @@
 {
 	"name": "linked-folder-pane",
 	"version": "1.0.0",
-	"description": "Show the files of a folder on your disk next to the note that links to it.",
+	"description": "Show an external folder from your disk next to the note that links to it, updated live as files are added or removed.",
 	"main": "main.js",
 	"type": "module",
 	"scripts": {

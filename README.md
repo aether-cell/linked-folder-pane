@@ -1,6 +1,6 @@
 # Linked Folder Pane
 
-See the files of a project folder on your disk right next to the note about that project.
+Show an external folder from your disk next to the note that links to it, updated live as files are added or removed.
 
 Add one property to a note, for example:
 
@@ -66,7 +66,6 @@ If the property holds a list, the first entry is used. When you pick a folder in
 - Desktop only. It uses Node.js file APIs that aren't available on mobile.
 - Each level shows at most 500 entries. Very large folders are cut off with a note.
 - Live updates use the operating system's file watcher. Some network drives and cloud-sync folders don't report changes reliably. Use the **Refresh** button in that case.
-- Email is not supported.
 
 ## Manual installation
 
