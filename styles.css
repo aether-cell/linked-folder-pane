@@ -1,0 +1,107 @@
+/* Linked Folder Pane */
+
+.linked-folder-pane-inner {
+	display: flex;
+	flex-direction: column;
+	gap: var(--size-4-2);
+}
+
+.linked-folder-pane-header {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--size-4-1);
+	padding-bottom: var(--size-4-2);
+	border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.linked-folder-pane-title {
+	flex: 1 1 auto;
+	font-weight: var(--font-semibold);
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.linked-folder-pane-actions {
+	display: flex;
+	gap: var(--size-2-1);
+}
+
+.linked-folder-pane-path {
+	order: 3;
+	flex-basis: 100%;
+	font-size: var(--font-ui-smaller);
+	color: var(--text-muted);
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	direction: rtl;
+	text-align: left;
+}
+
+.linked-folder-pane-row {
+	display: flex;
+	align-items: center;
+	gap: var(--size-4-1);
+	padding: var(--size-2-1) var(--size-4-1);
+	padding-inline-start: calc(var(--size-4-1) + var(--lfp-depth, 0) * var(--size-4-4));
+	border-radius: var(--radius-s);
+	font-size: var(--font-ui-small);
+	cursor: var(--cursor);
+}
+
+.linked-folder-pane-row:hover,
+.linked-folder-pane-row:focus-visible {
+	background-color: var(--background-modifier-hover);
+}
+
+.linked-folder-pane-note {
+	color: var(--text-faint);
+	font-style: italic;
+	cursor: default;
+}
+
+.linked-folder-pane-note:hover {
+	background-color: transparent;
+}
+
+.linked-folder-pane-icon {
+	display: flex;
+	color: var(--text-muted);
+}
+
+.linked-folder-pane-icon svg {
+	width: var(--icon-s);
+	height: var(--icon-s);
+}
+
+.linked-folder-pane-name {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.linked-folder-pane-message {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: var(--size-4-2);
+	color: var(--text-muted);
+	font-size: var(--font-ui-small);
+	padding: var(--size-4-2) var(--size-4-1);
+}
+
+.linked-folder-pane-problem {
+	color: var(--text-error);
+}
+
+.linked-folder-pane-buttons {
+	display: flex;
+	gap: var(--size-4-2);
+}
+
+.linked-folder-pane-input {
+	width: 100%;
+	min-width: 16em;
+}

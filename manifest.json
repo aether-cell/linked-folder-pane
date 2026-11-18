@@ -1,0 +1,10 @@
+{
+	"id": "linked-folder-pane",
+	"name": "Linked Folder Pane",
+	"version": "1.0.0",
+	"minAppVersion": "1.7.2",
+	"description": "Show the files of a folder on your disk next to the note that links to it, updated live as files are added or removed.",
+	"author": "aether-cell",
+	"authorUrl": "https://github.com/aether-cell",
+	"isDesktopOnly": true
+}
