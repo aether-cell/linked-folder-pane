@@ -91,7 +91,7 @@ export class LinkedFolderView extends ItemView {
 		for (const dir of folders) {
 			if (this.watchers.has(dir)) continue;
 			try {
-				const w = watch(dir, { persistent: false }, () => this.scheduleRefresh());
+				const w: FSWatcher = watch(dir, { persistent: false }, () => this.scheduleRefresh());
 				w.on('error', () => {
 					w.close();
 					this.watchers.delete(dir);

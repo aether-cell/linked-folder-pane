@@ -1,4 +1,5 @@
 import { promises as fsp } from 'fs';
+import type { Dirent, Stats } from 'fs';
 import * as path from 'path';
 
 import { FolderEntry, ListOptions, sortEntries } from './sort';
@@ -14,7 +15,7 @@ export type FolderState =
 /** Read one folder level. Never throws; reports a state instead. */
 export async function readFolder(folder: string, opts: ListOptions): Promise<FolderState> {
 	try {
-		const stat = await fsp.stat(folder);
+		const stat: Stats = await fsp.stat(folder);
 		if (!stat.isDirectory()) return { kind: 'not-a-folder' };
 	} catch (err) {
 		const code = (err as NodeJS.ErrnoException).code;
@@ -22,7 +23,7 @@ export async function readFolder(folder: string, opts: ListOptions): Promise<Fol
 		return { kind: 'error', message: errorMessage(err) };
 	}
 	try {
-		const dirents = await fsp.readdir(folder, { withFileTypes: true });
+		const dirents: Dirent[] = await fsp.readdir(folder, { withFileTypes: true });
 		const entries: FolderEntry[] = [];
 		for (const d of dirents) {
 			const fullPath = path.join(folder, d.name);

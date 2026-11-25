@@ -1,4 +1,4 @@
-import { App, PluginSettingTab, Setting } from 'obsidian';
+import { App, PluginSettingTab, Setting, SettingDefinitionItem } from 'obsidian';
 import type LinkedFolderPanePlugin from './main';
 
 export interface LinkedFolderPaneSettings {
@@ -13,6 +13,8 @@ export const DEFAULT_SETTINGS: LinkedFolderPaneSettings = {
 	foldersFirst: true,
 };
 
+type SettingKey = keyof LinkedFolderPaneSettings;
+
 export class LinkedFolderPaneSettingTab extends PluginSettingTab {
 	plugin: LinkedFolderPanePlugin;
 
@@ -21,6 +23,10 @@ export class LinkedFolderPaneSettingTab extends PluginSettingTab {
 		this.plugin = plugin;
 	}
 
+	/**
+	 * Kept for Obsidian older than 1.13.0 (minAppVersion is 1.7.2).
+	 * On 1.13.0+ the app renders {@link getSettingDefinitions} instead.
+	 */
 	display(): void {
 		const { containerEl } = this;
 		containerEl.empty();
@@ -57,5 +63,52 @@ export class LinkedFolderPaneSettingTab extends PluginSettingTab {
 					await this.plugin.saveSettings();
 				}),
 			);
+	}
+
+	getSettingDefinitions(): SettingDefinitionItem<SettingKey>[] {
+		return [
+			{
+				name: 'Property name',
+				desc: 'Frontmatter property that holds the folder path for a note. Absolute paths, ~ for your home folder, or paths relative to the vault root.',
+				control: {
+					type: 'text',
+					key: 'propertyName',
+					placeholder: DEFAULT_SETTINGS.propertyName,
+				},
+			},
+			{
+				name: 'Show hidden files',
+				desc: 'Show files and folders whose names start with a dot.',
+				control: {
+					type: 'toggle',
+					key: 'showHiddenFiles',
+				},
+			},
+			{
+				name: 'Folders first',
+				desc: 'List subfolders before files.',
+				control: {
+					type: 'toggle',
+					key: 'foldersFirst',
+				},
+			},
+		];
+	}
+
+	/** Persist through saveSettings() so the open pane refreshes, matching display(). */
+	async setControlValue(key: string, value: unknown): Promise<void> {
+		if (key === 'propertyName') {
+			const raw = typeof value === 'string' ? value.trim() : '';
+			this.plugin.settings.propertyName = raw || DEFAULT_SETTINGS.propertyName;
+		} else if (key === 'showHiddenFiles') {
+			if (typeof value !== 'boolean') return;
+			this.plugin.settings.showHiddenFiles = value;
+		} else if (key === 'foldersFirst') {
+			if (typeof value !== 'boolean') return;
+			this.plugin.settings.foldersFirst = value;
+		} else {
+			return;
+		}
+		await this.plugin.saveSettings();
 	}
 }
