@@ -1,7 +1,6 @@
 import { App, Modal, Notice, Setting, TFile } from 'obsidian';
-import { existsSync, statSync } from 'fs';
-import type { Stats } from 'fs';
 import type LinkedFolderPanePlugin from '../main';
+import { existsSync, statSync } from '../utils/node';
 import { resolveLinkedFolder, toStoredValue } from '../utils/paths';
 import { canPickFolder, pickFolder } from '../utils/system';
 
@@ -77,7 +76,7 @@ export class SetFolderModal extends Modal {
 		const ctx = this.plugin.getResolveContext();
 		const abs = ctx ? resolveLinkedFolder(value, ctx) : null;
 		if (abs) {
-			const stat: Stats | null = existsSync(abs) ? statSync(abs) : null;
+			const stat = existsSync(abs) ? statSync(abs) : null;
 			if (!stat || !stat.isDirectory()) {
 				new Notice('Saved, but that folder does not exist yet.');
 			}

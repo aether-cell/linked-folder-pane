@@ -1,9 +1,8 @@
 import { FileSystemAdapter, Plugin, TFile } from 'obsidian';
-import * as os from 'os';
-import * as path from 'path';
 import { registerCommands } from './commands';
 import { DEFAULT_SETTINGS, LinkedFolderPaneSettings, LinkedFolderPaneSettingTab } from './settings';
 import { LinkedFolderView, VIEW_TYPE_LINKED_FOLDER } from './ui/folder-view';
+import { homedir, path } from './utils/node';
 import { readFolderValue, resolveLinkedFolder, ResolveContext } from './utils/paths';
 
 export interface LinkedFolderInfo {
@@ -57,7 +56,7 @@ export default class LinkedFolderPanePlugin extends Plugin {
 	getResolveContext(): ResolveContext | null {
 		const adapter = this.app.vault.adapter;
 		if (!(adapter instanceof FileSystemAdapter)) return null;
-		return { vaultRoot: adapter.getBasePath(), homeDir: os.homedir(), path };
+		return { vaultRoot: adapter.getBasePath(), homeDir: homedir(), path };
 	}
 
 	/** Linked folder for a note, or null if the note has no usable property. */

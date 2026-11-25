@@ -1,6 +1,6 @@
 {
 	"name": "linked-folder-pane",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "Show an external folder from your disk next to the note that links to it, updated live as files are added or removed.",
 	"main": "main.js",
 	"type": "module",
@@ -8,7 +8,7 @@
 		"dev": "node esbuild.config.mjs",
 		"build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
 		"version": "node version-bump.mjs && git add manifest.json versions.json",
-		"lint": "eslint .",
+		"lint": "eslint . --max-warnings 0",
 		"test": "node --test \"test/**/*.test.ts\""
 	},
 	"keywords": [

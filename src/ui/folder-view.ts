@@ -1,7 +1,7 @@
 import { ItemView, Menu, Notice, TFile, WorkspaceLeaf, setIcon } from 'obsidian';
-import { FSWatcher, watch } from 'fs';
 import type LinkedFolderPanePlugin from '../main';
 import { FolderEntry, readFolder } from '../utils/listing';
+import { type FSWatcher, watch } from '../utils/node';
 import { openWithDefaultApp, revealInFileManager } from '../utils/system';
 import { SetFolderModal } from './set-folder-modal';
 

@@ -30,4 +30,18 @@ export default defineConfig(
 		},
 	},
 	...obsidianmd.configs.recommended,
+	{
+		// The community scanner enables these type-aware rules even though
+		// eslint-plugin-obsidianmd recommended turns them off. Keep local lint
+		// aligned with the public scorecard.
+		files: ['src/**/*.ts'],
+		rules: {
+			'@typescript-eslint/no-unsafe-assignment': 'warn',
+			'@typescript-eslint/no-unsafe-call': 'warn',
+			'@typescript-eslint/no-unsafe-member-access': 'warn',
+			'@typescript-eslint/no-unsafe-return': 'warn',
+			'@typescript-eslint/no-redundant-type-constituents': 'warn',
+		},
+	},
 );
+
